@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://gali472.github.io">
   <title>机器学习中的熵　 | Idiot</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="机器学习中很多算法都和熵密切相关，如决策树中的信息增益/信息增益比（Information Gain）、Loss function中的交叉熵损失（Cross Entropy）、特征工程中的互信息（Mutual Information）、衡量两个概率分布的相似性KL距离（Kullback-Leibler Divergence）等，这些概念有的是一回事，有的不是一回事。由于在实际工作中也用到">
+  <meta name="description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;机器学习中很多算法都和熵密切相关，如决策树中的信息增益/信息增益比（Information Gain）、Loss function中的交叉熵损失（Cross Entropy）、特征工程中的互信息（Mutual Information）、衡量两个概率分布的相似性KL距离（Kullback-Leibler Divergence）等，这些概念有的是一回事">
 <meta name="keywords" content="互信息,交叉熵,相对熵,KL距离">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习中的熵　">
 <meta property="og:url" content="http://gali472.github.io/2017/08/13/机器学习中的熵/index.html">
 <meta property="og:site_name" content="Idiot">
-<meta property="og:description" content="机器学习中很多算法都和熵密切相关，如决策树中的信息增益/信息增益比（Information Gain）、Loss function中的交叉熵损失（Cross Entropy）、特征工程中的互信息（Mutual Information）、衡量两个概率分布的相似性KL距离（Kullback-Leibler Divergence）等，这些概念有的是一回事，有的不是一回事。由于在实际工作中也用到">
+<meta property="og:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;机器学习中很多算法都和熵密切相关，如决策树中的信息增益/信息增益比（Information Gain）、Loss function中的交叉熵损失（Cross Entropy）、特征工程中的互信息（Mutual Information）、衡量两个概率分布的相似性KL距离（Kullback-Leibler Divergence）等，这些概念有的是一回事">
 <meta property="og:updated_time" content="2017-08-20T12:49:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习中的熵　">
-<meta name="twitter:description" content="机器学习中很多算法都和熵密切相关，如决策树中的信息增益/信息增益比（Information Gain）、Loss function中的交叉熵损失（Cross Entropy）、特征工程中的互信息（Mutual Information）、衡量两个概率分布的相似性KL距离（Kullback-Leibler Divergence）等，这些概念有的是一回事，有的不是一回事。由于在实际工作中也用到">
+<meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;机器学习中很多算法都和熵密切相关，如决策树中的信息增益/信息增益比（Information Gain）、Loss function中的交叉熵损失（Cross Entropy）、特征工程中的互信息（Mutual Information）、衡量两个概率分布的相似性KL距离（Kullback-Leibler Divergence）等，这些概念有的是一回事">
   
     <link rel="alternative" href="/atom.xml" title="Idiot" type="application/atom+xml">
   
@@ -175,73 +175,76 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>    机器学习中很多算法都和熵密切相关，如决策树中的信息增益/信息增益比（Information Gain）、Loss function中的交叉熵损失（Cross Entropy）、特征工程中的互信息（Mutual Information）、衡量两个概率分布的相似性KL距离（Kullback-Leibler Divergence）等，这些概念有的是一回事，有的不是一回事。由于在实际工作中也用到了许多熵的概念，本文对这些概念做一次梳理。</p>
+<p>&ensp;&ensp;&ensp;&ensp;机器学习中很多算法都和熵密切相关，如决策树中的信息增益/信息增益比（Information Gain）、Loss function中的交叉熵损失（Cross Entropy）、特征工程中的互信息（Mutual Information）、衡量两个概率分布的相似性KL距离（Kullback-Leibler Divergence）等，这些概念有的是一回事，有的不是一回事。由于在实际工作中也用到了许多熵的概念，本文对这些概念做一次梳理。</p>
 </blockquote>
-<h3 id="简介">1. 简介</h3>
-<p>    <strong>熵</strong>，最初来源于物理学中的热力学领域。香农将熵引入信息论领域，用统计学的方法来定义熵，后来称之为香农熵或者信息熵。<strong>信息熵</strong>最初被用来衡量消息传输所包含的信息量，单位为bit，其含义是：</p>
+<h3 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h3><p>&ensp;&ensp;&ensp;&ensp;<strong>熵</strong>，最初来源于物理学中的热力学领域。香农将熵引入信息论领域，用统计学的方法来定义熵，后来称之为香农熵或者信息熵。<strong>信息熵</strong>最初被用来衡量消息传输所包含的信息量，单位为bit，其含义是：</p>
 <blockquote>
-<p>    一个信道所能传输的信息量最少能用多少个二进制编码来表示。</p>
+<p>&ensp;&ensp;&ensp;&ensp;一个信道所能传输的信息量最少能用多少个二进制编码来表示。</p>
 </blockquote>
-<p>统计学上的解释是： &gt;     对于一个随机变量x，其包含的平均的信息量，即信息量的数学期望。</p>
+<p>统计学上的解释是：</p>
+<blockquote>
+<p>&ensp;&ensp;&ensp;&ensp;对于一个随机变量x，其包含的平均的信息量，即信息量的数学期望。</p>
+</blockquote>
 <p>投掷一枚质地均匀的硬币，其正面与反面是等可能出现的，信息熵为 <code>$(-\frac{1}{2}\log_2\frac{1}{2}) + (-\frac{1}{2}\log_2\frac{1}{2}) = \log_2 2=1 bit$</code>，投掷一个质地均匀的六面体骰子，对于出现骰子的点数这一随机事件，其信息熵为<code>$\sum_{n=1}^6(-\frac{1}{6}\log_2\frac{1}{6}) =\log_2 6 \approx 2.58bit$</code>, 假若硬币／骰子是不均匀的呢？举个例子，假设在抛硬币这一随机实验中，随机抽取10000个样本，观测到9990个样本出现正面，10个样本出现反面，则对于硬币出现正反面这一随机变量，其信息熵为<code>$(-\frac{10}{10000}\log_2\frac{10}{10000}) + (-\frac{9990}{10000}\log_2\frac{9990}{10000}) \approx 0.0114$</code>。显然，对于一个确定事件，其信息熵为0(注意<code>$\lim_{p\rightarrow+0} p\log_2p = 0$</code>)。</p>
 <blockquote>
-<p>    当对数函数取不同的底数时，熵的单位也不同，本文为了同一度量衡，对数函数的底数取2，单位为bit。</p>
+<p>&ensp;&ensp;&ensp;&ensp;当对数函数取不同的底数时，熵的单位也不同，本文为了同一度量衡，对数函数的底数取2，单位为bit。</p>
 </blockquote>
-<h3 id="几个概念">2. 几个概念</h3>
-<p>    已知一个离散型随机变量<code>$X(X\in \{x_1,...,x_n\})$</code>，以及概率质量函数<code>$P(X)$</code>。 - 自信息量： 随机变量<code>$X$</code>自信息量<code>$I(X)$</code>被定义为: <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">I(X) = -\log P(X) \qquad\cdots\cdots\qquad(2.1)</div></pre></td></tr></table></figure></p>
+<h3 id="2-几个概念"><a href="#2-几个概念" class="headerlink" title="2. 几个概念"></a>2. 几个概念</h3><p>&ensp;&ensp;&ensp;&ensp;已知一个离散型随机变量<code>$X(X\in \{x_1,...,x_n\})$</code>，以及概率质量函数<code>$P(X)$</code>。</p>
 <ul>
-<li><p>信息熵：信息熵被定义为随机变量<code>$X$</code>的自信息量的数学期望： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">H(X)=E[I(X)] </div><div class="line">\qquad\qquad\qquad\qquad</div><div class="line"></div><div class="line">= E[-\log P(X)]</div><div class="line">\qquad\qquad\qquad\qquad</div><div class="line"></div><div class="line">=\sum_&#123;i=1&#125;^n - P(x_i)\log P(x_i) \qquad\cdots\cdots\qquad(2.2)</div></pre></td></tr></table></figure></p></li>
-<li><p>条件熵：对于两个随机变量<code>$X$</code>、<code>$Y$</code>及其相应的取值<code>$x_i$</code>、<code>$y_i$</code>，条件Y下随机变量X的信息熵定义为：</p></li>
+<li><p>自信息量：<br>随机变量<code>$X$</code>自信息量<code>$I(X)$</code>被定义为:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">I(X) = -\log P(X) \qquad\cdots\cdots\qquad(2.1)</div></pre></td></tr></table></figure>
+</li>
+<li><p>信息熵：信息熵被定义为随机变量<code>$X$</code>的自信息量的数学期望：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">H(X)=E[I(X)] </div><div class="line">\qquad\qquad\qquad\qquad</div><div class="line"></div><div class="line">= E[-\log P(X)]</div><div class="line">\qquad\qquad\qquad\qquad</div><div class="line"></div><div class="line">=\sum_&#123;i=1&#125;^n - P(x_i)\log P(x_i) \qquad\cdots\cdots\qquad(2.2)</div></pre></td></tr></table></figure>
+</li>
+<li><p>条件熵：对于两个随机变量<code>$X$</code>、<code>$Y$</code>及其相应的取值<code>$x_i$</code>、<code>$y_i$</code>，条件Y下随机变量X的信息熵定义为：</p>
+</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">H(X|Y) = \sum_&#123;i,j&#125; -P(x_i,y_j)\log\frac&#123;P(x_i,y_j)&#125;&#123;P(y_j)&#125;</div><div class="line">\qquad\cdots\cdots\qquad(2.3)</div></pre></td></tr></table></figure>
-<h3 id="信息熵在机器学习中的应用">3. 信息熵在机器学习中的应用</h3>
-<h4 id="互信息">3.1 互信息</h4>
-<p>     在机器学习中，互信息常用来衡量单个特征与标签之间的相关性。互信息通过衡量分布 <code>$X$</code>与<code>$Y$</code>的条件独立性来判断<code>$X$</code>与<code>$Y$</code>的相关性，对于两个随机变量<code>$X$</code>、<code>$Y$</code> （<code>$X\in \{x_1,...,x_n\},Y\in \{y_1,...,y_m\}$</code>），互信息的定义为：</p>
+<h3 id="3-信息熵在机器学习中的应用"><a href="#3-信息熵在机器学习中的应用" class="headerlink" title="3. 信息熵在机器学习中的应用"></a>3. 信息熵在机器学习中的应用</h3><h4 id="3-1-互信息"><a href="#3-1-互信息" class="headerlink" title="3.1 互信息"></a>3.1 互信息</h4><p>&ensp;&ensp;&ensp;&ensp;<br>在机器学习中，互信息常用来衡量单个特征与标签之间的相关性。互信息通过衡量分布 <code>$X$</code>与<code>$Y$</code>的条件独立性来判断<code>$X$</code>与<code>$Y$</code>的相关性，对于两个随机变量<code>$X$</code>、<code>$Y$</code> （<code>$X\in \{x_1,...,x_n\},Y\in \{y_1,...,y_m\}$</code>），互信息的定义为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">I(X,Y)=\sum_&#123;i,j&#125;P(x_i,y_j)\log \frac&#123;P(x_i,y_j)&#125;&#123;P(x_i)P(y_j)&#125;\qquad\cdots\cdots\qquad(3.1)</div></pre></td></tr></table></figure>
-<p>     式（3.1）的外层为一个联合分布期望形式，再看<code>$\log$</code>函数部分：</p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>式（3.1）的外层为一个联合分布期望形式，再看<code>$\log$</code>函数部分：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">\log \frac&#123;P(x_i,y_j)&#125;&#123;P(x_i)P(y_j)&#125;</div><div class="line"></div><div class="line"></div><div class="line">= -[\log P(x_i) + \log P(y_j)-\log P(x_i,y_j)]</div><div class="line"></div><div class="line">=I(x_i)+I(y_j)-I(x_i,y_j)\qquad\cdots\cdots\qquad(3.2)</div></pre></td></tr></table></figure>
-<p>     当随机变量<code>$X$</code>与<code>$Y$</code>条件独立时：</p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>当随机变量<code>$X$</code>与<code>$Y$</code>条件独立时：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">I(x_i,y_j)=I(x_i)+I(y_j)\qquad\cdots\cdots\qquad(3.3)</div></pre></td></tr></table></figure>
-<p>     因此<code>$I(X,Y)$</code>的<strong>最小值为0</strong>，再次对式（3.1）做变换：</p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>因此<code>$I(X,Y)$</code>的<strong>最小值为0</strong>，再次对式（3.1）做变换：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">I(X,Y)=\sum_&#123;i,j&#125;P(x_i,y_j)\log \frac&#123;P(x_i,y_j)&#125;&#123;P(x_i)P(y_j)&#125;</div><div class="line">\qquad\qquad\qquad\qquad</div><div class="line"></div><div class="line">=\sum_&#123;i&#125;P(x_i)\log \frac&#123;1&#125;&#123;P(x_i)&#125;-\sum_&#123;i,j&#125;P(x_i,y_j)\log \frac&#123;P(x_i,y_j)&#125;&#123;P(y_j)&#125;</div><div class="line">\qquad\qquad\qquad\qquad</div><div class="line"></div><div class="line">=H(X)-H(X|Y)</div><div class="line">\qquad\qquad\qquad\qquad</div><div class="line"></div><div class="line">=H(Y)-H(Y|X)</div><div class="line">\qquad\cdots\cdots\qquad(3.4)</div></pre></td></tr></table></figure>
-<p>     由（3.4）知，互信息取得<strong>最大值为<code>$\min[H(X),H(Y)]$</code> ,此时<code>$H(Y|X)=0$</code>或<code>$H(Y|X)=0$</code>,即<code>$X$</code>能把<code>$Y$</code>完全区分开来或<code>$Y$</code>能把<code>$X$</code>完全区分开来</strong> &gt; 当用互信息衡量某一特征与标签的相关性时，互信息的最大值为<code>$\min[H(X),H(Y)]$</code>， 假设标签的分布为<code>$P(Y)$</code>，则所有特征与标签的互信息必小于<code>$H(Y)$</code>。因此<strong>互信息的大小要与<code>$H(Y)$</code>相比较才有意义</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>由（3.4）知，互信息取得<strong>最大值为<code>$\min[H(X),H(Y)]$</code> ,此时<code>$H(Y|X)=0$</code>或<code>$H(Y|X)=0$</code>,即<code>$X$</code>能把<code>$Y$</code>完全区分开来或<code>$Y$</code>能把<code>$X$</code>完全区分开来</strong></p>
 <blockquote>
+<p>当用互信息衡量某一特征与标签的相关性时，互信息的最大值为<code>$\min[H(X),H(Y)]$</code>， 假设标签的分布为<code>$P(Y)$</code>，则所有特征与标签的互信息必小于<code>$H(Y)$</code>。因此<strong>互信息的大小要与<code>$H(Y)$</code>相比较才有意义</strong></p>
 <p>之所以说<strong>互信息对多值特征有利</strong>，是因为在训练样本量一定的情况下，多值特征更加容易由于随机因素造成统计不充分性，极限情况下，假设10000个样本，某个id类特征有10000个特征值，则此时该ID类特征与互信息取得最大值<code>$H(Y)$</code>。</p>
 </blockquote>
-<h4 id="信息增益">3.2 信息增益</h4>
-<p>    信息增益来源于决策树ID3算法，用于在决策树节点分裂时选择最优分裂特征，假设标签分布为<code>$P(Y)$</code>，特征分布为<code>$P(X)$</code>，则信息增益定义为： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">G(Y,X)=H(Y)-H(Y|X)</div><div class="line">\qquad\cdots\cdots\qquad(3.5)</div></pre></td></tr></table></figure></p>
-<p>    直观的解释就是：在分布P(X)条件下，条件熵<code>$H(Y|X)$</code>与<code>$H(Y)$</code> 相比所减少的信息量。 式（3.5）与式(3.4)等价，因此信息增益与互信息是等价的，只是互信息以<strong>相关性</strong>角度来说明特征与标签的关系，而信息增益以<strong>熵减</strong>角度来来说明特征与标签的关系。</p>
+<h4 id="3-2-信息增益"><a href="#3-2-信息增益" class="headerlink" title="3.2 信息增益"></a>3.2 信息增益</h4><p>&ensp;&ensp;&ensp;&ensp;信息增益来源于决策树ID3算法，用于在决策树节点分裂时选择最优分裂特征，假设标签分布为<code>$P(Y)$</code>，特征分布为<code>$P(X)$</code>，则信息增益定义为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">G(Y,X)=H(Y)-H(Y|X)</div><div class="line">\qquad\cdots\cdots\qquad(3.5)</div></pre></td></tr></table></figure></p>
+<p>&ensp;&ensp;&ensp;&ensp;直观的解释就是：在分布P(X)条件下，条件熵<code>$H(Y|X)$</code>与<code>$H(Y)$</code> 相比所减少的信息量。 式（3.5）与式(3.4)等价，因此信息增益与互信息是等价的，只是互信息以<strong>相关性</strong>角度来说明特征与标签的关系，而信息增益以<strong>熵减</strong>角度来来说明特征与标签的关系。</p>
 <ul>
 <li><strong>信息增益率</strong></li>
 </ul>
-<p>     由于信息增益在多值特征上容易出现过拟合问题，决策树C4.5在ID3的基础上改进了特征选择方法，其具体做法为：以<code>$\frac{1}{H(X)}$</code>作为对信息增益的惩罚因子，此时： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">G_R(Y,X)=\frac&#123;H(Y)-H(Y|X)&#125;&#123;H(X)&#125;</div><div class="line">\qquad\cdots\cdots\qquad(3.6)</div></pre></td></tr></table></figure></p>
-<h4 id="kl距离相对熵交叉熵">3.3 KL距离（相对熵）、交叉熵</h4>
-<ul>
+<p>&ensp;&ensp;&ensp;&ensp;<br>由于信息增益在多值特征上容易出现过拟合问题，决策树C4.5在ID3的基础上改进了特征选择方法，其具体做法为：以<code>$\frac{1}{H(X)}$</code>作为对信息增益的惩罚因子，此时：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">G_R(Y,X)=\frac&#123;H(Y)-H(Y|X)&#125;&#123;H(X)&#125;</div><div class="line">\qquad\cdots\cdots\qquad(3.6)</div></pre></td></tr></table></figure></p>
+<h4 id="3-3-KL距离（相对熵）、交叉熵"><a href="#3-3-KL距离（相对熵）、交叉熵" class="headerlink" title="3.3 KL距离（相对熵）、交叉熵"></a>3.3 KL距离（相对熵）、交叉熵</h4><ul>
 <li><strong>相对熵</strong></li>
 </ul>
-<p>     KL距离（相对熵）用来衡量两个分布的差异性，常见于NLP领域如LDA、pLSA等概率图模型中衡量两个文档主题分布的相似性。</p>
-<p>     假设存在两个离散型概率分布<code>$P(X)$</code>和<code>$Q(X)$</code>，令P和Q的相对熵为<code>$D_{KL}(P||Q)$</code>，则<code>$D_{KL}(P||Q)$</code>定义为： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">D_&#123;KL&#125;(P||Q)=\sum_&#123;i&#125; P(x_i)\log\frac&#123;P(x_i)&#125;&#123;Q(x_i)&#125;</div><div class="line">\qquad\cdots\cdots\qquad(3.7)</div><div class="line"></div><div class="line">=\sum_&#123;i&#125; P(x_i)\log\frac&#123;1&#125;&#123;Q(x_i)&#125;-\sum_&#123;i&#125; P(x_i)\log\frac&#123;1&#125;&#123;P(x_i)&#125;</div><div class="line">\qquad\cdots\cdots\qquad(3.8)</div></pre></td></tr></table></figure></p>
-<p>     <strong>相对熵具有非负性，即<code>$D_{KL}(P||Q) \geq 0$</code> 。</strong> 证明如下：</p>
-<p>     由于<code>$\ln x \leq x-1 $</code>在<code>$x \geq 0$</code>时恒成立，当且仅当<code>$x=1$</code>时取得等号。所以，</p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>KL距离（相对熵）用来衡量两个分布的差异性，常见于NLP领域如LDA、pLSA等概率图模型中衡量两个文档主题分布的相似性。</p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>假设存在两个离散型概率分布<code>$P(X)$</code>和<code>$Q(X)$</code>，令P和Q的相对熵为<code>$D_{KL}(P||Q)$</code>，则<code>$D_{KL}(P||Q)$</code>定义为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">D_&#123;KL&#125;(P||Q)=\sum_&#123;i&#125; P(x_i)\log\frac&#123;P(x_i)&#125;&#123;Q(x_i)&#125;</div><div class="line">\qquad\cdots\cdots\qquad(3.7)</div><div class="line"></div><div class="line">=\sum_&#123;i&#125; P(x_i)\log\frac&#123;1&#125;&#123;Q(x_i)&#125;-\sum_&#123;i&#125; P(x_i)\log\frac&#123;1&#125;&#123;P(x_i)&#125;</div><div class="line">\qquad\cdots\cdots\qquad(3.8)</div></pre></td></tr></table></figure></p>
+<p>&ensp;&ensp;&ensp;&ensp;<br><strong>相对熵具有非负性，即<code>$D_{KL}(P||Q) \geq 0$</code> 。</strong> 证明如下：</p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>由于<code>$\ln x \leq x-1 $</code>在<code>$x \geq 0$</code>时恒成立，当且仅当<code>$x=1$</code>时取得等号。所以，</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">D_&#123;KL&#125;(P||Q)=\sum_&#123;i&#125; P(x_i)\log\frac&#123;P(x_i)&#125;&#123;Q(x_i)&#125;</div><div class="line">\qquad\qquad\qquad\qquad</div><div class="line"></div><div class="line">=-\sum_&#123;i&#125; P(x_i)\log\frac&#123;Q(x_i)&#125;&#123;P(x_i)&#125;</div><div class="line">\qquad\qquad\qquad\qquad</div><div class="line"></div><div class="line">\geq -\sum_&#123;i&#125; P(x_i)(\frac&#123;Q(x_i)&#125;&#123;P(x_i)&#125;-1)</div><div class="line">\qquad\qquad\qquad\qquad</div><div class="line"></div><div class="line">= \sum_&#123;i&#125; P(x_i)-\sum_&#123;i&#125; Q(x_i)=0</div><div class="line">\qquad\cdots\cdots\qquad(3.9)</div></pre></td></tr></table></figure>
-<p>     当<code>$Q(x_i)=P(x_i)$</code>，<code>$\bigvee i \in \{1,\cdots,n \}$</code>时，<code>$D_{KL}(P||Q)=0$</code> 成立。</p>
-<p>     <strong>相对熵不满足交换率，即：<code>$D_{KL}(P||Q) \neq  D_{KL}(Q||P)$</code>。</strong></p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>当<code>$Q(x_i)=P(x_i)$</code>，<code>$\bigvee i \in \{1,\cdots,n \}$</code>时，<code>$D_{KL}(P||Q)=0$</code> 成立。</p>
+<p>&ensp;&ensp;&ensp;&ensp;<br><strong>相对熵不满足交换率，即：<code>$D_{KL}(P||Q) \neq  D_{KL}(Q||P)$</code>。</strong></p>
 <ul>
 <li><strong>交叉熵</strong></li>
 </ul>
-<p>     在信息论中，分布<code>$P$</code>与分布<code>$Q$</code>的交叉熵表示用分布<code>$P$</code>来编码来自分布<code>$Q$</code>中的样本所需要的平均编码长度。对于真实分布<code>$P$</code>与假设分布<code>$Q$</code>，<code>$P$</code>与<code>$Q$</code>的交叉熵定义为：</p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>在信息论中，分布<code>$P$</code>与分布<code>$Q$</code>的交叉熵表示用分布<code>$P$</code>来编码来自分布<code>$Q$</code>中的样本所需要的平均编码长度。对于真实分布<code>$P$</code>与假设分布<code>$Q$</code>，<code>$P$</code>与<code>$Q$</code>的交叉熵定义为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">H(P,Q)=-\sum_&#123;i&#125; P(x_i) \log Q(x_i)</div><div class="line">\qquad\cdots\cdots\qquad(3.10)</div></pre></td></tr></table></figure>
-<p>     由(3.8)以及(2.2)知： <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">D_&#123;KL&#125;(P||Q)=H(P,Q)-H(P)</div><div class="line">\qquad\cdots\cdots\qquad(3.11)</div></pre></td></tr></table></figure></p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>由(3.8)以及(2.2)知：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">D_&#123;KL&#125;(P||Q)=H(P,Q)-H(P)</div><div class="line">\qquad\cdots\cdots\qquad(3.11)</div></pre></td></tr></table></figure></p>
 <ul>
 <li><strong>交叉熵损失的内涵</strong></li>
 </ul>
-<p>     在机器学习中，交叉熵损失是最为常见的一种损失函数之一，通常，<code>$P$</code>代表训练样本的标签（真实分布，如0或1），而<code>$Q$</code>为<code>$sigmod$</code>函数（假设分布），由式(3.9)知，<code>$H(P,Q) \geq H(P)$</code>，而相对熵<code>$D_{KL}(P||Q)$</code>则代表牺牲掉的编码长度，由于<code>$H(P)$</code>已知，因此优化目标即为 <code>$\min_\theta H(P,Q)$</code>，<code>$\theta$</code>为目标参数。</p>
-<h3 id="reference">Reference</h3>
-<p>[1] https://en.wikipedia.org/wiki/Cross_entropy</p>
-<p>[2] https://en.wikipedia.org/wiki/Entropy</p>
-<p>[3] https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence</p>
-<p>[4] https://en.wikipedia.org/wiki/Gibbs%27_inequality</p>
-<p>[5] https://www.zhihu.com/question/41252833</p>
+<p>&ensp;&ensp;&ensp;&ensp;<br>在机器学习中，交叉熵损失是最为常见的一种损失函数之一，通常，<code>$P$</code>代表训练样本的标签（真实分布，如0或1），而<code>$Q$</code>为<code>$sigmod$</code>函数（假设分布），由式(3.9)知，<code>$H(P,Q) \geq H(P)$</code>，而相对熵<code>$D_{KL}(P||Q)$</code>则代表牺牲掉的编码长度，由于<code>$H(P)$</code>已知，因此优化目标即为 <code>$\min_\theta H(P,Q)$</code>，<code>$\theta$</code>为目标参数。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>[1] <a href="https://en.wikipedia.org/wiki/Cross_entropy" target="_blank" rel="external">https://en.wikipedia.org/wiki/Cross_entropy</a></p>
+<p>[2] <a href="https://en.wikipedia.org/wiki/Entropy" target="_blank" rel="external">https://en.wikipedia.org/wiki/Entropy</a></p>
+<p>[3] <a href="https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence" target="_blank" rel="external">https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence</a></p>
+<p>[4] <a href="https://en.wikipedia.org/wiki/Gibbs%27_inequality" target="_blank" rel="external">https://en.wikipedia.org/wiki/Gibbs%27_inequality</a></p>
+<p>[5] <a href="https://www.zhihu.com/question/41252833" target="_blank" rel="external">https://www.zhihu.com/question/41252833</a></p>
 
       
 
