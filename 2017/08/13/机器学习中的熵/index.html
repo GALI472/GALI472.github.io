@@ -15,7 +15,7 @@
 <meta property="og:url" content="http://gali472.github.io/2017/08/13/机器学习中的熵/index.html">
 <meta property="og:site_name" content="Idiot">
 <meta property="og:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;机器学习中很多算法都和熵密切相关，如决策树中的信息增益/信息增益比（Information Gain）、Loss function中的交叉熵损失（Cross Entropy）、特征工程中的互信息（Mutual Information）、衡量两个概率分布的相似性KL距离（Kullback-Leibler Divergence）等，这些概念有的是一回事">
-<meta property="og:updated_time" content="2017-08-20T15:47:48.000Z">
+<meta property="og:updated_time" content="2017-10-02T08:07:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习中的熵　">
 <meta name="twitter:description" content="&amp;ensp;&amp;ensp;&amp;ensp;&amp;ensp;机器学习中很多算法都和熵密切相关，如决策树中的信息增益/信息增益比（Information Gain）、Loss function中的交叉熵损失（Cross Entropy）、特征工程中的互信息（Mutual Information）、衡量两个概率分布的相似性KL距离（Kullback-Leibler Divergence）等，这些概念有的是一回事">
@@ -185,7 +185,7 @@
 <blockquote>
 <p>&ensp;&ensp;&ensp;&ensp;对于一个随机变量x，其包含的平均的信息量，即信息量的数学期望。</p>
 </blockquote>
-<p>投掷一枚质地均匀的硬币，其正面与反面是等可能出现的，信息熵为((-\frac{1}{2}\log_2\frac{1}{2}) + (-\frac{1}{2}\log_2\frac{1}{2}) = \log<em>2 2=1 bit)，投掷一个质地均匀的六面体骰子，对于出现骰子的点数这一随机事件，其信息熵为(\sum</em>{n=1}^6(-\frac{1}{6}\log_2\frac{1}{6}) =\log_2 6 \approx 2.58bit), 假若硬币／骰子是不均匀的呢？举个例子，假设在抛硬币这一随机实验中，随机抽取10000个样本，观测到9990个样本出现正面，10个样本出现反面，则对于硬币出现正反面这一随机变量，其信息熵为((-\frac{10}{10000}\log_2\frac{10}{10000}) + (-\frac{9990}{10000}\log<em>2\frac{9990}{10000}) \approx 0.0114)。显然，对于一个确定事件，其信息熵为0(注意(\lim</em>{p\rightarrow+0} p\log_2p = 0) )。</p>
+<p>投掷一枚质地均匀的硬币，其正面与反面是等可能出现的，信息熵为$((-\frac{1}{2}\log_2\frac{1}{2}) + (-\frac{1}{2}\log_2\frac{1}{2}) = \log<em>2 2=1 bit)$，投掷一个质地均匀的六面体骰子，对于出现骰子的点数这一随机事件，其信息熵为(\sum</em>{n=1}^6(-\frac{1}{6}\log_2\frac{1}{6}) =\log_2 6 \approx 2.58bit), 假若硬币／骰子是不均匀的呢？举个例子，假设在抛硬币这一随机实验中，随机抽取10000个样本，观测到9990个样本出现正面，10个样本出现反面，则对于硬币出现正反面这一随机变量，其信息熵为((-\frac{10}{10000}\log_2\frac{10}{10000}) + (-\frac{9990}{10000}\log<em>2\frac{9990}{10000}) \approx 0.0114)。显然，对于一个确定事件，其信息熵为0(注意(\lim</em>{p\rightarrow+0} p\log_2p = 0) )。</p>
 <blockquote>
 <p>&ensp;&ensp;&ensp;&ensp;当对数函数取不同的底数时，熵的单位也不同，本文为了同一度量衡，对数函数的底数取2，单位为bit。</p>
 </blockquote>
@@ -509,6 +509,18 @@ MathJax.Hub.Queue(function() {
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tag1</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tag2</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">tag3</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">互信息</a>
               </li>
              
@@ -522,18 +534,6 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">KL距离</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tag1</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tag2</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">tag3</a>
               </li>
             
             <div class="clearfix"></div>
